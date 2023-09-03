@@ -26,16 +26,16 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install wget apt-transport-https gnup
 
 
 # Download the Microsoft repository GPG keys
-RUN DEBIAN_FRONTEND=noninteractive wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
-# Register the Microsoft repository GPG keys
-RUN DEBIAN_FRONTEND=noninteractive dpkg -i packages-microsoft-prod.deb
-# Delete the the Microsoft repository GPG keys file
-RUN DEBIAN_FRONTEND=noninteractive rm packages-microsoft-prod.deb
-RUN DEBIAN_FRONTEND=noninteractive apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y powershell
+# RUN DEBIAN_FRONTEND=noninteractive wget -q "https://packages.microsoft.com/config/ubuntu/$(lsb_release -rs)/packages-microsoft-prod.deb"
+# # Register the Microsoft repository GPG keys
+# RUN DEBIAN_FRONTEND=noninteractive dpkg -i packages-microsoft-prod.deb
+# # Delete the the Microsoft repository GPG keys file
+# RUN DEBIAN_FRONTEND=noninteractive rm packages-microsoft-prod.deb
+# RUN DEBIAN_FRONTEND=noninteractive apt-get update
+# RUN DEBIAN_FRONTEND=noninteractive apt-get install -y powershell
 
-# #AZ Modules 
-RUN DEBIAN_FRONTEND=noninteractive pwsh -ExecutionPolicy Bypass -Command "Install-Module -Name Az -Repository PSGallery -Force -AllowClobber -scope allusers -verbose" 
+# # #AZ Modules 
+# RUN DEBIAN_FRONTEND=noninteractive pwsh -ExecutionPolicy Bypass -Command "Install-Module -Name Az -Repository PSGallery -Force -AllowClobber -scope allusers -verbose" 
 
 
 # #Ansible

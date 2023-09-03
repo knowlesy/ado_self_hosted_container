@@ -71,3 +71,4 @@ References below have helped in making this example
 * [Run a self-hosted agent in Docker](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/docker?view=azure-devops)
 * [Packer install on ubuntu](https://computingforgeeks.com/how-to-install-and-use-packer/?expand_article=1)
 * [Hashicorp Packer Container](https://github.com/hashicorp/docker-hub-images/tree/master/packer)
+* [Powershell installation Ubuntu](https://learn.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.3)
