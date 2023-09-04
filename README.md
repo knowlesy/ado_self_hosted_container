@@ -47,6 +47,8 @@ In ADO under your project go to project settings > service connections > new ser
 Click Azure Container Reg... set to Service Principle Click Add 
 
 
+    docker build -t pkadoagent:latest --no-cache
+    docker run -e AZP_URL="https://dev.azure.com/<>/" -e AZP_TOKEN= -e AZP_AGENT_NAME=mydockeragent -e AZP_POOL=test image1:1.2 
 
 
 
@@ -72,3 +74,4 @@ References below have helped in making this example
 * [Packer install on ubuntu](https://computingforgeeks.com/how-to-install-and-use-packer/?expand_article=1)
 * [Hashicorp Packer Container](https://github.com/hashicorp/docker-hub-images/tree/master/packer)
 * [Powershell installation Ubuntu](https://learn.microsoft.com/en-us/powershell/scripting/install/install-ubuntu?view=powershell-7.3)
+* [ADO Docker Env Variables](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/docker?view=azure-devops#environment-variables)

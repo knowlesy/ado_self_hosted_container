@@ -1,0 +1,30 @@
+pool:
+  name: test
+
+steps:
+- task: Bash@3
+  displayName: 'Az CLI version'
+  inputs:
+    targetType: 'inline'
+    script: 'az version'
+- task: PowerShell@2
+  displayName: 'Powershell version'
+  inputs:
+    targetType: 'inline'
+    script: 'get-host'
+- task: Bash@3
+  displayName: 'Terraform version'
+  inputs:
+    targetType: 'inline'
+    script: 'terraform version'
+- task: Bash@3
+  displayName: 'Packer version'
+  inputs:
+    targetType: 'inline'
+    script: 'packer version'
+
+- task: Bash@3
+  displayName: 'Ansible Local Host Ping'
+  inputs:
+    targetType: 'inline'
+    script: 'ansible localhost -m ping'
