@@ -1,21 +1,22 @@
-terraform {
-  required_providers {
-    azurerm = {
-      source  = "hashicorp/azurerm"
-      version = "=2.97.0"
-    }
-  }
-}
+# terraform {
+#      azurerm = {
+#       source  = "hashicorp/azurerm"
+#       version = "3.42.0"
+#     }
+#   }
 
-#required
-provider "azurerm" {
-  features {}
-}
+# provider "azurerm" {
+#   features {
+#   }
+#   client_id       = "00000000-0000-0000-0000-000000000000"
+#   client_secret   = "10000000-0000-0000-0000-000000000000"
+#   tenant_id       = "10000000-0000-0000-0000-000000000000"
+# }
 
-resource "azurerm_resource_group" "rg" {
-  name     = "TestRG-Terram"
-  location = "uksouth"
-  tags = {
-    "environment" = "dev"
-  }
-}
+# resource "azurerm_resource_group" "rg" {
+#   location = "uksouth"
+#   name     = "TestRG-Terram"
+#     tags = {
+#     "environment" = "dev"
+#   }
+# }

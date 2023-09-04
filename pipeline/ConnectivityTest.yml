@@ -1,84 +1,83 @@
 
-variables:
+# variables:
 
-#additional IDs that need to be modified no <> is needed 
-- name: tennant
-  value: '<tennant id>'
-- name: appid
-  value: '<service principle id>'
-# refences the variable group you linked with your keyvault
-- group: Ansible
+# #additional IDs that need to be modified no <> is needed 
+# - name: tennant
+#   value: '<tennant id>'
+# - name: appid
+#   value: '<service principle id>'
+# - group: tests
 
-pool:
-  name: test
+# pool:
+#   name: test
 
-steps:
+# steps:
 
-- task: CopyFiles@2
-  displayName: 'Copying Tests'
-  inputs:
-    SourceFolder: '$(Build.SourcesDirectory)/tests'
-    Contents: '*.*'
-    TargetFolder: '/etc/tests'
-    CleanTargetFolder: true
-    retryCount: '2'
-    ignoreMakeDirErrors: true
+# - task: CopyFiles@2
+#   displayName: 'Copying Tests'
+#   inputs:
+#     SourceFolder: '$(Build.SourcesDirectory)/tests'
+#     Contents: '*.*'
+#     TargetFolder: '/etc/tests'
+#     CleanTargetFolder: true
+#     retryCount: '2'
+#     ignoreMakeDirErrors: true
 
-- task: Bash@3
-  displayName: 'AZ Login for Dynamic Repo'
-  inputs:
-    targetType: 'inline'
-    script: 'az login --service-principal -u $(appid) -p $(password) -t $(tennant)'
+# - task: Bash@3
+#   displayName: 'AZ Login for Dynamic Repo'
+#   inputs:
+#     targetType: 'inline'
+#     script: 'az login --service-principal -u $(appid) -p $(password) -t $(tennant)'
 
-- task: Bash@3
-  displayName: 'Reports Inventory List'
-  inputs:
-    targetType: 'inline'
-    script: 'ansible-inventory -i /etc/tests/inventory_azure_rm.yaml --graph'
+# - task: Bash@3
+#   displayName: 'Reports Inventory List'
+#   inputs:
+#     targetType: 'inline'
+#     script: 'ansible-inventory -i /etc/tests/inventory_azure_rm.yaml --graph'
 
-- task: PowerShell@2
-  displayName: 'Powershell version'
-  inputs:
-    targetType: 'inline'
-    script: 'get-host'
+# - task: PowerShell@2
+#   displayName: 'Powershell version'
+#   inputs:
+#     targetType: 'inline'
+#     script: 'get-host'
 
-- task: Bash@3
-  displayName: 'Terraform init'
-  inputs:
-    targetType: 'inline'
-    script: 'terraform version'
-    workingDirectory: '/etc/tests'
+# - task: Bash@3
+#   displayName: 'Terraform init'
+#   inputs:
+#     targetType: 'inline'
+#     script: 'terraform init'
+#     workingDirectory: '/etc/tests'
 
-- task: Bash@3
-  displayName: 'Terraform plan'
-  inputs:
-    targetType: 'inline'
-    script: 'terraform plan'
-    workingDirectory: '/etc/tests'
+# - task: Bash@3
+#   displayName: 'Terraform plan'
+#   inputs:
+#     targetType: 'inline'
+#     script: 'terraform plan'
+#     workingDirectory: '/etc/tests'
 
-- task: Bash@3
-  displayName: 'Terraform apply'
-  inputs:
-    targetType: 'inline'
-    script: 'terraform apply -auto-approve'
-    workingDirectory: '/etc/tests'
+# - task: Bash@3
+#   displayName: 'Terraform apply'
+#   inputs:
+#     targetType: 'inline'
+#     script: 'terraform apply -auto-approve'
+#     workingDirectory: '/etc/tests'
   
-- task: Bash@3
-  displayName: 'Packer init'
-  inputs:
-    targetType: 'inline'
-    script: 'packer init'
-    workingDirectory: '/etc/tests'
+# - task: Bash@3
+#   displayName: 'Packer init'
+#   inputs:
+#     targetType: 'inline'
+#     script: 'packer init'
+#     workingDirectory: '/etc/tests'
 
-- task: Bash@3
-  displayName: 'Packer build'
-  inputs:
-    targetType: 'inline'
-    script: 'packer build '
-    workingDirectory: '/etc/tests'
+# - task: Bash@3
+#   displayName: 'Packer build'
+#   inputs:
+#     targetType: 'inline'
+#     script: 'packer build '
+#     workingDirectory: '/etc/tests'
 
-- task: Bash@3
-  displayName: 'Ansible Local Host Ping'
-  inputs:
-    targetType: 'inline'
-    script: 'ansible localhost -m ping'
+# - task: Bash@3
+#   displayName: 'Ansible Local Host Ping'
+#   inputs:
+#     targetType: 'inline'
+#     script: 'ansible localhost -m ping'

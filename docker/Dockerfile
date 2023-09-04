@@ -65,9 +65,5 @@ WORKDIR /azp
 COPY ./start.sh .
 RUN chmod +x start.sh
 
-RUN DEBIAN_FRONTEND=noninteractive apt update
-RUN DEBIAN_FRONTEND=noninteractive apt upgrade -y
-RUN DEBIAN_FRONTEND=noninteractive pip3 list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1 | xargs -n1 pip3 install -U 
-
 
 ENTRYPOINT [ "./start.sh" ]
