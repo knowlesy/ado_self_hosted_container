@@ -1,5 +1,5 @@
 pool:
-  name: test
+  name: <poolname>
 
 steps:
 - task: Bash@3

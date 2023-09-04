@@ -6,68 +6,25 @@ This is a lab only !
 
 ## Pre-Req's
 
-* Azure Devops Organization and Project for testing
-* terraform installed locally
-* VSCode with TF Extension and Git
-* AZ Cli or AZ PS Module 
-* Azure Environment 
-* Azure Service Principle created  and set up in Azure devops [guide](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication/service-principal-managed-identity?view=azure-devops) , [alt guide](https://learn.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli)
+* Docker
+* ADO Project / API Token / Pool name
 
 ## Instructions
 
-Git clone in VS Code and cd into the TF folder then run through the motions
+Clone the docker\* files locally to a folder 
 
-Import the repo into your test project in ADO
+in a command window cd int ot that directory and run the following command
 
+    docker build -t adoagent:latest --no-cache
 
+This will compile the container for you 
 
-
-
-In your VSCode Terminal 
-
-Log in to azure [AZ CLI](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli) or [Powershell](https://learn.microsoft.com/en-us/powershell/azure/authenticate-azureps?view=azps-10.1.0)
-
-Initialize TF Code
-
-    terraform init -upgrade
-
-Plan TF Code
-
-    terraform plan -out main.tfplan
-
-Apply TF Code
-
-    terraform apply main.tfplan
+You can then run the container by populating the folling variables <> below 
 
 
-Once this has run add your SPN as a contributor to the ACR
+    docker run -e AZP_URL="https://dev.azure.com/<orgname>/" -e AZP_TOKEN=<token> -e AZP_AGENT_NAME=<agentname> -e AZP_POOL=<poolname> adoagent:latest
 
-In ADO under your project go to project settings > service connections > new service connection > docker registry > next
-
-Click Azure Container Reg... set to Service Principle Click Add 
-
-
-    docker build -t pkadoagent:latest --no-cache
-    docker run -e AZP_URL="https://dev.azure.com/<>/" -e AZP_TOKEN= -e AZP_AGENT_NAME=mydockeragent -e AZP_POOL=test image1:1.2 
-
-
-
-
-
-
-In Azure portal or via your connection to Azure run thr following AZ Cli command to see the images stored in the repository
-
-    az acr repository list --name <acrName> --output table
-
-To get a list of the versions run the following substituting reponame for your image name / build shown in the previous step
-
-    az acr repository show-tags -n <RegistryName> --repository <reponame> --orderby time_desc --output table
-
-
-DESTROY!!!!!!!!!!!!!
-
-    terraform plan -destroy -out main.destroy.tfplan
-    terraform apply "main.destroy.tfplan"
+If you want to run some basic tests you can use the "pipeline\BasicTest.yml" within ADO (remember to update the pool name variable)
 
 References below have helped in making this example 
 * [Run a self-hosted agent in Docker](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/docker?view=azure-devops)
